@@ -3,7 +3,7 @@ Dans le cadre du cours langage C du master PISE, ce programme implémente le cod
 
 ## Installation
 
-Importer le package et l'installer avec le script `install.sh` qui se charge d'appeler la commande `make` depuis le dossier `src`.
+Importer le package et l'installer avec le script `installer.sh` qui se charge d'appeler la commande `make` depuis le dossier `src`.
 
 ### Usage
 
@@ -32,15 +32,15 @@ Exemples:
 ```
 
 ### Test
-Lancer le script bash, il faudra peut-être le rendre exécutable `chmod +x run_all_tests`).
+Lancer le script bash, il faudra peut-être le rendre exécutable `chmod +x lancer_test`).
 ```
-./run_all_tests.sh
+./lancer_test.sh
 ```
- Ce script va compresser/décompresser un ensemble de fichier de test (`data/*`) et ajouter les résultat (le poids en octet avant/après) dans un fichier `stat.txt`
+ Ce script va compresser/décompresser un ensemble de fichier de test (`data_test/*`) et enregistrer le résultat de l'exécution dans un fichier `resultat_test.txt`
 
 ### Ressources
 
-Pour les fichiers de test (`data/*`)
+Pour les fichiers de test (`data_test/*`)
 
 - texte : [gutenberg.org](http://www.gutenberg.org/)
 - image : [unsplash.com](https://unsplash.com)
@@ -48,8 +48,8 @@ Pour les fichiers de test (`data/*`)
 
 ## Auteur
 
-* **rm dlnn**
-* **Hong**
+* **Rémi Dlnn**
+* **Hong Trn**
 
 Voir aussi la liste des [contributeurs](https://github.com/remidlnn/compression/graphs/contributors) qui ont participés au projet.
 

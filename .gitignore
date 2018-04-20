@@ -1,0 +1,34 @@
+# Object créé par le makefile
+*.o
+
+# L'exécutable
+comp
+
+# Dossier de debug
+debug/
+
+# Dossier output
+output/
+
+# Fichier des stats créées par run_test.sh
+resultat_test.txt
+
+# Fichier de test à ne pas diffuser pour des pb de droit
+data_test/coursphp.pdf
+data_test/v_700.avi
+fichier_binaire
+
+# Fichier de test à ne pas diffuser parce que trop lourd
+data_test/t_10.txt
+data_test/t_100.txt
+data_test/t_1000.txt
+data_test/t_2000.txt
+data_test/v_6.mp4
+data_test/v_8.mp4
+data_test/v_17.mp4
+data_test/v_100.mp4
+data_test/bdd.sqlite
+data_test/document.docx
+data_test/document.odt
+data_test/i_4.jpg
+data_test/i_6.jpg

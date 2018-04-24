@@ -130,11 +130,11 @@ int afficher_succes(int option, char * src, char * dst, unsigned int nb_octet_co
         case 1:
             strcpy(option_char, "compression");
             taux = ( (nb_octet_comp + taille_info) / (float) nb_octet_decomp ) * 100;
-            printf("1 Succès : %13s de %30s [%10d] vers %30s [%10d] [%7.2f%%]\n", option_char, src, nb_octet_decomp, dst, nb_octet_comp + taille_info, taux);
+            printf("1 Succès : %s de %s [%d] vers %s [%d] [%7.2f%%]\n", option_char, src, nb_octet_decomp, dst, nb_octet_comp + taille_info, taux);
             break;
         case 2:
             strcpy(option_char, "decompression");
-            printf("1 Succès : %13s de %30s [%10d] vers %30s [%10d]\n", option_char, src, nb_octet_comp  + taille_info, dst, nb_octet_decomp);
+            printf("1 Succès : %s de %s [%d] vers %s [%d]\n", option_char, src, nb_octet_comp  + taille_info, dst, nb_octet_decomp);
             break;
         default:
             break;

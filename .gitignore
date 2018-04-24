@@ -19,16 +19,16 @@ data_test/v_700.avi
 fichier_binaire
 
 # Fichier de test à ne pas diffuser parce que trop lourd
-data_test/t_10.txt
-data_test/t_100.txt
-data_test/t_1000.txt
-data_test/t_2000.txt
-data_test/v_6.mp4
-data_test/v_8.mp4
-data_test/v_17.mp4
-data_test/v_100.mp4
-data_test/bdd.sqlite
-data_test/document.docx
-data_test/document.odt
-data_test/i_4.jpg
-data_test/i_6.jpg
+t_10.txt
+t_100.txt
+t_1000.txt
+t_2000.txt
+v_6.mp4
+v_8.mp4
+v_17.mp4
+v_100.mp4
+bdd.sqlite
+document.docx
+document.odt
+i_4.jpg
+i_6.jpg

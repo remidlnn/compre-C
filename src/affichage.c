@@ -16,7 +16,7 @@ struct Noeud {
 
 /*******************************************************************************
     Afficher les fréquences :
-    int * tab_freq : tableau des 256 fréquences
+    unsigned int * tab_freq : tableau des 256 fréquences
 *******************************************************************************/
 void afficher_frequences(unsigned int * tab_freq)
 {
@@ -39,7 +39,7 @@ void afficher_frequences(unsigned int * tab_freq)
 
 /*******************************************************************************
     Afficher le tableau de pointeur de noeud :
-    struct Noeud * tabè[256] : pointeur vers tableau de 256 adresses de noeud
+    struct Noeud * tab_p_noeuds[256] : pointeur vers tableau d'adresses de noeud
 
 *******************************************************************************/
 void afficher_tab_p_noeuds(struct Noeud * tab_p_noeuds[256])
@@ -146,15 +146,14 @@ int afficher_succes(int option, char * src, char * dst, unsigned int nb_octet_co
     Afficher le resultat d'une éxecution en erreur et retourne la valeur de
     l'erreur
 
-    int erreur_num     : numéro de l'erreur (de 1 à 4)
-    char * nom_fichier : nom fichier à compresser
+    int erreur_num     : numéro de l'erreur (de 1 à 5)
+    char * nom_fichier : nom du fichier
 
 *******************************************************************************/
 int afficher_erreur(int erreur_num, char * nom_fichier)
 {
     switch (erreur_num) {
         case 1 :
-            // Nécessite de passer un nom_fichier fictif qui ne sera pas utilisé
             afficher_aide();
             return 1;
         case 2 :
@@ -170,6 +169,6 @@ int afficher_erreur(int erreur_num, char * nom_fichier)
             printf("5 Erreur : le fichier %s n'est pas un fichier valide\n", nom_fichier);
             return 5;
         default:
-            return 0; // améliorer gestion d'erreur dans erreur_num
+            return 0;
     }
 }

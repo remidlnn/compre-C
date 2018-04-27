@@ -28,13 +28,13 @@ void o_trier_tab(struct Noeud * tab[], int n);
 /******************************************************************************/
 /*                        Variables globales                                  */
 /******************************************************************************/
-unsigned int tab_frequences[256] = {0}; // Contiendra les fréquences des 256 valeurs que peut prendre un octet. Initialisé à 0.
-unsigned int nb_octet_decomp=0 ; // Nb d'octet du fichier décompressé
-unsigned int nb_octet_comp=0   ; // Nb d'octet du ficheir compressé
-int nb_bit=0                   ; // nb de bit significatif du dernier octet compressé
-int nb_noeuds = 0              ; // nb de noeud dans le tableau de pointeurs de noeuds
-struct Noeud * p_racine = NULL ; // Correspond à la racine de l'arbre
-struct Noeud * tab_p_noeuds[256] = {NULL}; // Tableau contenant les adresses des pointeurs vers les noeuds
+unsigned int tab_frequences[256] = {0}   ; // Contiendra les fréquences des 256 valeurs que peut prendre un octet. Initialisé à 0.
+unsigned int nb_octet_decomp=0           ; // Nb d'octets du fichier décompressé
+unsigned int nb_octet_comp=0             ; // Nb d'octets du ficheir compressé
+int nb_bit=0                             ; // Nb de bit significatif du dernier octet compressé
+struct Noeud * p_racine = NULL           ; // Correspond à la racine de l'arbre
+struct Noeud * tab_p_noeuds[256] = {NULL}; // Tableau de pointeurs vers les noeuds
+int nb_noeuds = 0                        ; // Nb de noeud dans le tableau de pointeurs de noeuds
 
 /*******************************************************************************
     Fonction principale

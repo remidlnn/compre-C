@@ -14,13 +14,14 @@ output/
 resultat_test.txt
 
 # Fichier de test à ne pas diffuser pour des pb de droit
-data_test/coursphp.pdf
-data_test/v_700.avi
+coursphp.pdf
+v_700.avi
 fichier_binaire
 
 # Fichier de test à ne pas diffuser parce que trop lourd
 t_10.txt
 t_100.txt
+t_500.txt
 t_1000.txt
 t_2000.txt
 v_6.mp4

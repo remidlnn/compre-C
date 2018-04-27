@@ -103,8 +103,8 @@ void afficher_aide()
     printf("    -c          : pour compresser\n")         ;
     printf("    -d          : pour décompresser\n")       ;
     printf("Argument\n")                                  ;
-    printf("    cible       : nom du fichier\n")          ;
-    printf("    destination : nom du fichier\n")          ;
+    printf("    source      : nom du fichier à (dé)compresser\n");
+    printf("    destination : nom du fichier en sortie\n");
 }
 
 /*******************************************************************************

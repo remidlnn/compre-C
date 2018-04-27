@@ -16,8 +16,8 @@ Options:
   -d            Pour décompresser
 
 Arguments:
-  <cible>       Nom du fichier cible
-  <destination> Nom du fichier destination
+<source>      Nom du fichier source à (dé)compresser en fonction de l’option
+<destination> Nom du fichier destination, le résultat du traitement
 
 Retour:
   0 : OK
@@ -38,7 +38,7 @@ Le script bash `lancer_test.sh` se charge d'exécuter une série de test. Il ser
 ```
 ./lancer_test.sh
 ```
- Ce script va compresser/décompresser un ensemble de fichier de test (`data_test/*`) et enregistrer le résultat de l'exécution dans un fichier `resultat_test.txt`
+ Ce script va compresser/décompresser un ensemble de fichier de test (`data_test/*`) pour tester les différentes retour (un succès et les 4 retour d'erreur possible).
 
 ### Ressources
 

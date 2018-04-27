@@ -3,7 +3,8 @@ Dans le cadre du cours langage C du master PISE, ce programme implémente le cod
 
 ## Installation
 
-Importer le package et l'installer avec le script `installer.sh` qui se charge d'appeler la commande `make` depuis le dossier `src`.
+Importer le package et l'installer avec le script `installer.sh` qui se charge d'appeler la commande `make` depuis le dossier `src`, de donner les droit d'exécution à l'exécutable et le déplace à la racine du dossier.
+Il sera peut-être nécessaire de le rendre exécutable `chmod +x installer.sh`.
 
 ### Usage
 
@@ -24,6 +25,7 @@ Retour:
   2 : Erreur pendant la lecture du fichier
   3 : Erreur pendant l'écriture du fichier
   4 : Compression inutile (fichier en soritie plus lourd)
+  5 : Fichier à décompresser non valide (pas issu d'une compression du programme)
 
 Exemples:
 
@@ -32,7 +34,7 @@ Exemples:
 ```
 
 ### Test
-Lancer le script bash, il faudra peut-être le rendre exécutable `chmod +x lancer_test`).
+Le script bash `lancer_test.sh` se charge d'exécuter une série de test. Il sera peut-être nécessaire de le rendre exécutable `chmod +x lancer_test`.
 ```
 ./lancer_test.sh
 ```

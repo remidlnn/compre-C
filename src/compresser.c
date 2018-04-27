@@ -10,7 +10,7 @@
 // #define DEBUG
 #define OPTION_COMP "-c"
 #define OPTION_DECOMP "-d"
-#define TAILLE_MORCEAU 10000
+#define TAILLE_MORCEAU 1000000
 
 /******************************************************************************/
 /*                      Déclaration préalable des fonctions                   */
@@ -194,7 +194,11 @@ int compresser(char * nom_dst, char * nom_src)
     unsigned char octet_a_ecrire=0;
     unsigned char octet_lu;
     struct Noeud * p_n;
-    int i, nb_octet_codes=0;
+    int i=0,j=0;
+    unsigned int taille_morceau_a_lire;
+    unsigned char morceau_a_lire[TAILLE_MORCEAU];
+    unsigned char morceau_a_ecrire[TAILLE_MORCEAU];
+    unsigned char * dernier_morceau_a_ecrire; // sera redimenssionné dynamiquement
     FILE * fdst;
     FILE * fsrc;
 
@@ -212,61 +216,83 @@ int compresser(char * nom_dst, char * nom_src)
         return 2;
     }
 
-
     // Ecrire le nb_octet_decomp (nécessaire pour vérifier le fichier)
     fwrite(&nb_octet_decomp, sizeof(unsigned int), 1, fdst);
 
     // Ecrire le tableau de 256 fréquences
     fwrite(tab_frequences, sizeof(unsigned int), 256, fdst);
 
-    // Boucle sur l'ensemble des octets du fichier à compresser
-    for (i=0; i < nb_octet_decomp; i++)
+    // Lire le premier morceau
+    if (nb_octet_decomp % TAILLE_MORCEAU)
     {
-        // Affecter à p_n le noeud correspondant à la valeur de l'octet
-        octet_lu = (unsigned char) fgetc(fsrc);
-        p_n = tab_p_noeuds[octet_lu];
+        taille_morceau_a_lire = nb_octet_decomp % TAILLE_MORCEAU;
+    }
+    else
+    {
+        taille_morceau_a_lire = TAILLE_MORCEAU;
+    }
 
-         // Tant qu'on n'a pas atteint la racine
-        while (p_n->precedent != NULL)
+    // Tant qu'il reste des morceaux à lire
+    while (fread(morceau_a_lire, sizeof(unsigned char), taille_morceau_a_lire, fsrc) == taille_morceau_a_lire)
+    {
+        // printf("MORCEAU\n"); // debug
+
+        // Boucle sur l'ensemble des octets du morceau à compresser
+        for (i=0; i < taille_morceau_a_lire; i++)
         {
-            // Si le noeud correspond au noeud descendant droite de son noeud précédent.
-            // Autrement dit : si les pointeurs pointent vers la même adresse.
-            // Sinon correspond au noeud descendant gauche
-            // rien dans le else car le >> 1 ajoute un 0 !
-            if (p_n->precedent->droite == p_n)
-            {
-                octet_a_ecrire += 1;
-            }
+            // Affecter à p_n le noeud correspondant à la valeur de l'octet
+            octet_lu = morceau_a_lire[i];
+            // printf("octet_lu : %c\n", octet_lu); // debug
+            p_n = tab_p_noeuds[octet_lu];
 
-            // Ecrire l'octet s'il est complété (8 bits écrits)
-            if (nb_bit == 8)
+             // Tant qu'on n'a pas atteint la racine
+            while (p_n->precedent != NULL)
             {
-                // ajoute le nouvel octet et incrémente le compteur
-                if (fputc(octet_a_ecrire, fdst) == EOF)
+                // Si le noeud correspond au noeud descendant droite de son noeud précédent.
+                // Autrement dit : si les pointeurs pointent vers la même adresse.
+                // Sinon correspond au noeud descendant gauche
+                // rien dans le else car le >> 1 ajoute un 0 !
+                if (p_n->precedent->droite == p_n)
                 {
-                    return 3;
+                    octet_a_ecrire += 1;
                 }
 
-                octet_a_ecrire = 0                                ;
-                nb_bit = 0                                        ;
+                // Ecrire l'octet s'il est complété (8 bits écrits)
+                if (nb_bit == 8)
+                {
+                    // ajoute le nouvel octet et incrémente le compteur
+                    morceau_a_ecrire[j++] = octet_a_ecrire;
+                    octet_a_ecrire = 0                    ;
+                    nb_bit = 0                            ;
+                }
+
+                // Ecrire le morceau à ecrire s'il est complet
+                if (j == TAILLE_MORCEAU)
+                {
+                    fwrite(morceau_a_ecrire, sizeof(unsigned char), TAILLE_MORCEAU, fdst);
+                    j=0; // Repartir à 0
+                }
+
+                // Décaller les bits de 1 vers la gauche
+                nb_bit++                            ;
+                octet_a_ecrire = octet_a_ecrire << 1;
+
+                // Remonter au noeud précédent
+                p_n = p_n->precedent;
             }
-
-            // Décaller les bits de 1 vers la gauche
-            nb_bit++                            ;
-            octet_a_ecrire = octet_a_ecrire << 1;
-
-            // Remonter au noeud précédent
-            p_n = p_n->precedent;
         }
+        // remettre la taille normale (différe de TAILLE_MORCEAU seulement au 1er tour)
+        taille_morceau_a_lire = TAILLE_MORCEAU;
     }
 
-    // Annuler le dernier tour de boucle et ajouter le dernier octet
+    // Annuler le dernier tour de boucle au niveau de l'octet et ecrire le dernier octet
     octet_a_ecrire = octet_a_ecrire >> 1;
+    morceau_a_ecrire[j++] = octet_a_ecrire;
 
-    if (fputc(octet_a_ecrire, fdst) == EOF)
-    {
-        return 3;
-    }
+    // Ecrire le dernier morceau qui n'est pas forcément complet
+    // Copier le contenu du morceau dans le dernier_morceau redimenssionné
+    dernier_morceau_a_ecrire = (unsigned char *) malloc(sizeof(unsigned char) * j);
+    fwrite(morceau_a_ecrire, sizeof(unsigned char), j, fdst);
 
     // Fermer les fichiers
     fclose(fdst);

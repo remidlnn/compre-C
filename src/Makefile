@@ -1,9 +1,11 @@
+# Liste des objets
 OBJETS= compresser.o affichage.o
 
-# compilation de l'executable
+# Compilation de l'exécutable
 comp: $(OBJETS)
 	cc -o comp $(OBJETS)
 
+# Création des objets
 compresser.o: compresser.c
 	cc -c compresser.c
 

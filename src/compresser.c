@@ -16,7 +16,6 @@
 /*                      Déclaration préalable des fonctions                   */
 /******************************************************************************/
 void estimer_compression(int * p_nb_bit, unsigned int * p_nb_octet_comp);
-unsigned int calculer_nb_octet_decomp(unsigned int tab_freq[]);
 int calculer_frequences(char * nom_src, unsigned int * tab_freq, unsigned int * p_nb_octet_decomp);
 int compresser(char * nom_dst, char * nom_src);
 int importer_frequence(char * nom_fichier);
@@ -29,8 +28,6 @@ void o_trier_tab(struct Noeud * tab[], int n);
 /******************************************************************************/
 /*                        Variables globales                                  */
 /******************************************************************************/
-unsigned char * tab_octets_decomp;// Contiendra les octets decompressés
-unsigned char * tab_octet_comp ; // Contiendra les octets compressés
 unsigned int tab_frequences[256] = {0}; // Contiendra les fréquences des 256 valeurs que peut prendre un octet. Initialisé à 0.
 unsigned int nb_octet_decomp=0 ; // Nb d'octet du fichier décompressé
 unsigned int nb_octet_comp=0   ; // Nb d'octet du ficheir compressé
@@ -343,7 +340,6 @@ int importer_frequence(char * nom_fichier)
     char * nom_src : nom du fichier source
     char * nom_dst : nom du fichier de destination
 
-    (globale) unsigned char * tab_octets_decomp : tableau d'octets decompressés
     (globale) unsigned int nb_octet_decomp      : nb octet decomp
     (globale) unsigned int nb_octet_comp        : nb octet comp
     (globale) int nb_bit                        : nb de bit significatif premier octet
@@ -597,25 +593,6 @@ void estimer_compression(int * p_nb_bit, unsigned int * p_nb_octet_comp)
         printf("nb_bit : %d\n", nb_bit);
     #endif
 }
-
-/*******************************************************************************
-    Calculer le nombre d'octet du fichier décompressé à partir des fréquences.
-    Le retour sera affecter à la variable globale nb_octet_decomp
-
-    int tab_freq[] : tableau de fréquences
-
-*******************************************************************************/
-unsigned int calculer_nb_octet_decomp(unsigned int tab_freq[])
-{
-    unsigned int nb=0;
-    int i=0;
-    for (i; i<256;i++)
-    {
-        nb += tab_freq[i];
-    }
-    return nb;
-}
-
 
 /*******************************************************************************
     Vérifier qu'un fichier en entré pour décompression est bien un fichier

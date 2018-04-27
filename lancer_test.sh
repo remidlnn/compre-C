@@ -25,7 +25,7 @@ echo "-------------------------------------"
 echo "---- Test en erreur 3 (ecriture) ----"
 echo "-------------------------------------"
 # le dossier erreur3 contient un fichier sur le quel on n'a pas le droit décrire
-./comp -c data_test/succes1/i_4.jpg data_test/erreur3/fichier.comp
+./comp -c data_test/succes1/v_0.2.mp4 data_test/erreur3/fichier.comp
 
 echo "------------------------------------------------------------------"
 echo "---- Teste une série de compression/décompression en erreur 4 ----"

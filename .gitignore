@@ -7,9 +7,6 @@ comp
 # Dossier de debug
 debug/
 
-# Dossier output
-output/
-
 # Fichier des stats créées par run_test.sh
 resultat_test.txt
 

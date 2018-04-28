@@ -151,7 +151,7 @@ int calculer_frequences(char * nom_src, unsigned int * tab_freq, unsigned int * 
         return 2;
     }
 
-    while ((retour = fgetc(fsrc)) != EOF) // Tant qu'on a pas atteind la fin du fichier
+    while ((retour = fgetc(fsrc)) != EOF) // Tant qu'on a pas atteint la fin du fichier
     {
         octet = (unsigned char) retour; // Caster car fgetc retourne un int !
         tab_freq[octet]++;              // Incrémente la fréquence correspondant à l'octet
@@ -404,7 +404,7 @@ int decompresser(char * nom_src, char * nom_dst)
         // Tant qu'il reste des bits à lire dans l'octet lu
         while (nb_bit > 0)
         {
-            // Desendre l'arbre en fonction de la valeur de l'octet le plus à droite
+            // Descendre l'arbre en fonction de la valeur de l'octet le plus à droite
             if ((octet_lu % 2) != 0)
             {
                 p_n = p_n->droite;
@@ -414,7 +414,7 @@ int decompresser(char * nom_src, char * nom_dst)
                 p_n = p_n->gauche;
             }
 
-            // Ecrire l'octet si l'on a atteind une feuille
+            // Ecrire l'octet si l'on a atteint une feuille
             if (p_n->gauche == NULL && p_n->droite == NULL)
             {
                 // Ajouter l'octet à la fin du morceau
@@ -456,7 +456,7 @@ int decompresser(char * nom_src, char * nom_dst)
 }
 
 /*******************************************************************************
-    Remplir le dictionnaire de noeuds à partir des fréquences et stocker le
+    Remplir le tableau de pointeur de noeuds à partir des fréquences et stocker le
     nombre de noeud.
 
     (globale) unsigned int tab_frequences[256] : tableau de fréquences
